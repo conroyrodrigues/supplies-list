@@ -25,6 +25,7 @@ namespace buildxact_supplies.Domain.Model.MegaCorp
         [JsonProperty("materialType")]
         public string MaterialType { set; get; }
 
+        // Derived Types from JSON File
         public decimal PriceInAUD { set; get; }
         public decimal PriceInDollar 
         {

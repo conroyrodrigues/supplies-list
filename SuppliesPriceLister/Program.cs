@@ -13,11 +13,13 @@ namespace SuppliesPriceLister
     {
         static void Main(string[] args)
         {
+            // Build the configuration for the project
+            var configuration = new ConfigurationBuilder()
+                                .AddJsonFile("appsettings.json", true, true)
+                                .Build();
             // Inject the Dependemcies require by each service
             var serviceProvider = new ServiceCollection()
-                .AddSingleton<IConfiguration>(new ConfigurationBuilder()
-                                                .AddJsonFile("appsettings.json", true, true)
-                                                .Build())
+                .AddSingleton<IConfiguration>(configuration)
                 .AddSingleton<ISuppliesService, SuppliesProvider>()
                 .AddSingleton<IMegaCorpService, MegaCorpProvider>()
                 .AddSingleton<IHumphriesService, HumphriesProvider>()

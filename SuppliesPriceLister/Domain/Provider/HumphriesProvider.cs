@@ -1,7 +1,6 @@
 ﻿using buildxact_supplies.Domain.Model.Generic;
 using buildxact_supplies.Domain.Model.Humphries;
 using buildxact_supplies.Domain.Services;
-using buildxact_supplies.Domain.Services.Base;
 using buildxact_supplies.Domain.Utility;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
@@ -16,7 +15,9 @@ namespace buildxact_supplies.Domain.Provider
         
         public HumphriesProvider(IConfiguration configuration) 
         {
-            _filePath = Path.Combine(FileUtilities.BasePath, configuration.GetSection("humphries").GetSection("assets").Value);
+            _filePath = Path.Combine(FileUtilities.BasePath, 
+                                        configuration.GetSection("humphries")
+                                        .GetSection("assets").Value);
         }
         
         /// <summary>
@@ -25,6 +26,10 @@ namespace buildxact_supplies.Domain.Provider
         /// <returns></returns>
         public IEnumerable<Supply> GetPriceInAUD() => FetchFromSource(); 
         
+        /// <summary>
+        /// Get a collection of supplies in Humphries
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<GenericSupplies> GetSupplies()
         {
             return FetchFromSource()

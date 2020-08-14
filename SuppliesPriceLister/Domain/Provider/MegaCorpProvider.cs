@@ -21,12 +21,16 @@ namespace buildxact_supplies.Domain.Provider
         {
             // Retrive Settings from appsettings
             _filePath = Path.Combine(FileUtilities.BasePath, 
-                                    configuration.GetSection("megaCorp").GetSection("assets").Value); 
+                                        configuration.GetSection("megaCorp")
+                                    .GetSection("assets").Value); 
 
-            this._conversionRate = Convert.ToDecimal(configuration["audUsdExchangeRate"]);
+            _conversionRate = Convert.ToDecimal(configuration["audUsdExchangeRate"]);
             
             // Set the default currency fo this Provider
-            _currencyType = (CurrencyType) Enum.Parse(typeof(CurrencyType), configuration.GetSection("megaCorp").GetSection("currencyType").Value);
+            _currencyType = (CurrencyType) Enum.Parse(typeof(CurrencyType), 
+                                                        configuration.GetSection("megaCorp")
+                                                        .GetSection("currencyType")
+                                                        .Value);
         }
 
         
@@ -36,11 +40,14 @@ namespace buildxact_supplies.Domain.Provider
         /// <returns></returns>
         public IEnumerable<Supply> GetPriceInAUD()
         {
+            // Check if the file exists before perfoming any operation
             if (!File.Exists(_filePath)) return new List<Supply>();
 
-            var requiresConversion = _currencyType != CurrencyType.AUD;
-
+            // Read the file from the provided path
             var suppliesFromSource =  FetchFromSource();
+            
+            // Check if there is a conversion required
+            var requiresConversion = _currencyType != CurrencyType.AUD;
 
             if (requiresConversion) 
             {
@@ -50,8 +57,7 @@ namespace buildxact_supplies.Domain.Provider
 
                 foreach (var supply in suppliesFromSource) {
                     
-                    supply.PriceInAUD = PriceConverter
-                                        .GetConvertedPrice(supply.PriceInDollar, _conversionRate);
+                    supply.PriceInAUD = PriceConverter.GetConvertedPrice(supply.PriceInDollar, _conversionRate);
                 }
             }
            
@@ -70,6 +76,10 @@ namespace buildxact_supplies.Domain.Provider
                 .SelectMany(z => z.Partners.SelectMany(a => a.Supplies));
         }
 
+        /// <summary>
+        /// Get a collection if supplies within MegaCorp 
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<GenericSupplies> GetSupplies()
         {
             return GetPriceInAUD()

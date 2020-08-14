@@ -9,6 +9,12 @@ namespace buildxact_supplies.Domain.Utility
 {
     public static class FileReader
     {
+        /// <summary>
+        /// Read A CSV file and return the provided type
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         public static IEnumerable<T> ReadCsvFile<T>(string filePath) 
         {
             using (var streamReader = new StreamReader(filePath))
@@ -19,6 +25,12 @@ namespace buildxact_supplies.Domain.Utility
             }
         }
 
+        /// <summary>
+        /// Read a JSOn file and return the provided type
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         public static IEnumerable<T> ReadJsonFile<T>(string filePath) 
         {
             using (StreamReader reader = File.OpenText(filePath))
