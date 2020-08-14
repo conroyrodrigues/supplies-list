@@ -39,7 +39,9 @@ Both humphries.csv and megacorp.json contain lists of construction supplies and 
 * Please ask any questions you wish
 
 ## Considerations/Notes
-* Please Run this on a windows Based system, as the file path might cause a problem
+* Please Run this on a windows based system, as the file path might cause a problem
+
+## Output
 ```
   -------------------------------------------------------------------------------------------------------------------
  | Id                                   | Description                                  | Price(AUD) | Rounded(AUD) |
