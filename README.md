@@ -37,3 +37,9 @@ Both humphries.csv and megacorp.json contain lists of construction supplies and 
 * Be prepared to talk us through your thinking process & assumptions as you go.
 * Feel free to use any resources you would normally use (Google, StackOverflow etc.)
 * Please ask any questions you wish
+
+## Considerations/Notes
+* Please Run this on a windows Based system, as the file path might cause a problem
+```
+ awasda
+```
