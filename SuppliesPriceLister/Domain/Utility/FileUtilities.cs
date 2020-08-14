@@ -5,7 +5,7 @@ namespace buildxact_supplies.Domain.Utility
 {
     public static class FileUtilities
     {
-        //TODO: Chnage this for a better approach
+        // TODO: A better way to do this, might not work with Linux File Systems
         public static string BasePath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\"));
     }
 }
